@@ -157,10 +157,10 @@ public class ServiceHelper {
 
         variablesList.forEach((outputParam) -> {
             Element childOutputParam = new Element("OUTPUTPARAMS");
-            LinkedHashMap m = (LinkedHashMap) variable;
-            childVariable.setAttribute("NAME", m.get("name").toString());
-            childVariable.addContent(m.get("value").toString());
-            childDefault.addContent(childVariable);
+            LinkedHashMap m = (LinkedHashMap) outputParam;
+            childOutputParam.setAttribute("NAME", m.get("name").toString());
+            childOutputParam.addContent(m.get("value").toString());
+            childDefault.addContent(childOutputParam);
         });
 
         return root;
