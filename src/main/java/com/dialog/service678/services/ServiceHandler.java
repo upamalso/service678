@@ -3,7 +3,6 @@ package com.dialog.service678.services;
 import com.dialog.service678.entities.Service;
 import com.dialog.service678.repositories.ServiceRepository;
 import org.json.JSONObject;
-import org.json.XML;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +39,7 @@ public class ServiceHandler {
         //String xmlString = this.jsonToXml(service.getJsonData());
         Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
         service.setXmlData(serviceXml);
+        service.setJsonData( new JSONObject(payload).toString());
         service.setCreatedDateTime(currentTimestamp);
         service.setUpdatedDateTime(currentTimestamp);
         serviceRepository.save(service);
@@ -53,6 +53,15 @@ public class ServiceHandler {
         List<Service> list = serviceRepository.findAll();
         LOG.info("Retrieved " + list.size() + " services");
         return new ResponseEntity<List<Service>>(list, HttpStatus.OK);
+    }
+
+    public ResponseEntity<List<Service>> getById(Long id) {
+        //List<Service> list =  serviceRepository.findById(id).get();
+        List l = new ArrayList<Service>();
+        l.add(serviceRepository.findById(id).get());
+       // new List<Service>(serviceRepository.findById(id));
+        //LOG.info("Retrieved " + list.size() + " services");
+        return new ResponseEntity<List<Service>>(l, HttpStatus.OK);
     }
 
 

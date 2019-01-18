@@ -1,2 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<SERVICE NAME="NAME" />
+<SERVICE NAME="NAME">
+  <BLOCK ID="1" TYPE="ASSIGN">
+    <VARIABLE NAME="876">jh</VARIABLE>
+    <NEXT-NODE>6</NEXT-NODE>
+  </BLOCK>
+  <BLOCK ID="1" TYPE="FUNC">
+    <CLASS>OCSClient</CLASS>
+    <METHOD>queryCustomer</METHOD>
+    <NEXT-NODE>2</NEXT-NODE>
+    <PARAM NAME="yyyy">yyyyyyy</PARAM>
+  </BLOCK>
+  <BLOCK ID="7" TYPE="BRANCH">
+    <CASE ID="iuhh">
+      <EXPRESSION>iuhih</EXPRESSION>
+      <NEXT-NODE>iuy</NEXT-NODE>
+      <VARIABLE NAME="kj">ihih</VARIABLE>
+    </CASE>
+    <DEFAULT>
+      <NEXT-NODE>ihiuh</NEXT-NODE>
+      <VARIABLE NAME="iihih">ihihUpdated</VARIABLE>
+    </DEFAULT>
+  </BLOCK>
+</SERVICE>

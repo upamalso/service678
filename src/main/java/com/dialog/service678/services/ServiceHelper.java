@@ -25,7 +25,7 @@ public class ServiceHelper {
             LinkedHashMap m = (LinkedHashMap) n;
             if (m.get("type").equals("ASSIGN")) {
                 root.addContent(createAssignNode(m));
-            } else if (m.get("type").equals( "FUNC")) {
+            } else if (m.get("type").equals( "FUNCTION")) {
                 root.addContent(createFunctionNode(m));
             } else if (m.get("type").equals("BRANCH")) {
                 root.addContent(createBranchNode(m));
@@ -85,7 +85,7 @@ public class ServiceHelper {
         root.addContent(childMethod);
         root.addContent(childNextNode);
 
-        ArrayList paramList = (ArrayList) node.get("params");
+        ArrayList paramList = (ArrayList) node.get("param");
         paramList.forEach((v) -> {
             Element childPram = new Element("PARAM");
             LinkedHashMap m = (LinkedHashMap) v;
@@ -153,7 +153,7 @@ public class ServiceHelper {
         root.setAttribute("TYPE", "RETURN");
 
         Element childDefault = new Element("DEFAULT");
-        ArrayList variablesList = (ArrayList)node.get("output-params");
+        ArrayList variablesList = (ArrayList)node.get("out-params");
 
         variablesList.forEach((outputParam) -> {
             Element childOutputParam = new Element("OUTPUTPARAMS");

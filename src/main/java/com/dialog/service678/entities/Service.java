@@ -29,6 +29,7 @@ public class Service {
     private String name;
 
     @XmlElement(name="json-data")
+    @Lob
     private String jsonData;
 
     @XmlElement(name="xml-data")
