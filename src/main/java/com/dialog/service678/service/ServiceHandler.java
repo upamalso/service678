@@ -1,7 +1,7 @@
-package com.dialog.service678.services;
+package com.dialog.service678.service;
 
-import com.dialog.service678.entities.Service;
-import com.dialog.service678.repositories.ServiceRepository;
+import com.dialog.service678.entity.Service;
+import com.dialog.service678.repository.ServiceRepository;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -51,7 +51,7 @@ public class ServiceHandler {
 
     public ResponseEntity<List<Service>> getAll() {
         List<Service> list = serviceRepository.findAll();
-        LOG.info("Retrieved " + list.size() + " services");
+        LOG.info("Retrieved " + list.size() + " service");
         return new ResponseEntity<List<Service>>(list, HttpStatus.OK);
     }
 
@@ -60,7 +60,7 @@ public class ServiceHandler {
         List l = new ArrayList<Service>();
         l.add(serviceRepository.findById(id).get());
        // new List<Service>(serviceRepository.findById(id));
-        //LOG.info("Retrieved " + list.size() + " services");
+        //LOG.info("Retrieved " + list.size() + " service");
         return new ResponseEntity<List<Service>>(l, HttpStatus.OK);
     }
 
