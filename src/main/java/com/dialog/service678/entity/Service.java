@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlElement;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "service")
+@Table(name = "service_upl")
 public class Service {
 
     public Service() {
