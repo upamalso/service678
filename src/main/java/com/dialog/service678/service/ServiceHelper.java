@@ -153,7 +153,7 @@ public class ServiceHelper {
         root.setAttribute("TYPE", "RETURN");
 
         Element childDefault = new Element("DEFAULT");
-        ArrayList variablesList = (ArrayList)node.get("out-params");
+        ArrayList variablesList = (ArrayList)node.get("output-params");
 
         variablesList.forEach((outputParam) -> {
             Element childOutputParam = new Element("OUTPUTPARAMS");

@@ -26,27 +26,34 @@ public class ServiceHandler {
     public ResponseEntity<String> createService(Map<String, Object> payload) {
         //validate data
 
-        //convert to serviceUpl object
-        ServiceUpl serviceUpl = new ServiceUpl();
-        serviceUpl.setName(payload.get("name").toString());
-        serviceUpl.setStatus(payload.get("status").toString());
+        //convert to service object
+        ServiceUpl service = new ServiceUpl();
+
+        if (payload.containsKey("id")) {
+            if ((Integer)payload.get("id") > 0) {
+                service.setId(((Integer) payload.get("id")).longValue());
+            }
+        }
+
+        service.setName(payload.get("name").toString());
+        service.setStatus(payload.get("status").toString());
         ArrayList nodeList = (ArrayList)payload.get("data");
         String serviceXml = serviceHelper.generateServiceXml(nodeList);
 
 
         //JSONObject data = new JSONObject(payload.get("status"));
 
-        //String xmlString = this.jsonToXml(serviceUpl.getJsonData());
+        //String xmlString = this.jsonToXml(service.getJsonData());
         Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
-        serviceUpl.setXmlData(serviceXml);
-        serviceUpl.setJsonData( new JSONObject(payload).toString());
-        serviceUpl.setCreatedDateTime(currentTimestamp);
-        serviceUpl.setUpdatedDateTime(currentTimestamp);
-        serviceRepository.save(serviceUpl);
+        service.setXmlData(serviceXml);
+        service.setJsonData( new JSONObject(payload).toString());
+        service.setCreatedDateTime(currentTimestamp);
+        service.setUpdatedDateTime(currentTimestamp);
+        serviceRepository.save(service);
 
 
-        LOG.info("Created new serviceUpl with sequence id '" + serviceUpl.getId() + "' and name '" + serviceUpl.getName() + "'");
-        return new ResponseEntity<String>("ServiceUpl created with sequence id of " + serviceUpl.getId(), HttpStatus.CREATED);
+        LOG.info("Created new service with sequence id '" + service.getId() + "' and name '" + service.getName() + "'");
+        return new ResponseEntity<String>("Service created with sequence id of " + service.getId(), HttpStatus.CREATED);
     }
 
     public ResponseEntity<List<ServiceUpl>> getAll() {
@@ -56,10 +63,10 @@ public class ServiceHandler {
     }
 
     public ResponseEntity<List<ServiceUpl>> getById(Long id) {
-        //List<ServiceUpl> list =  serviceRepository.findById(id).get();
+        //List<Service> list =  serviceRepository.findById(id).get();
         List l = new ArrayList<ServiceUpl>();
         l.add(serviceRepository.findById(id).get());
-       // new List<ServiceUpl>(serviceRepository.findById(id));
+        // new List<Service>(serviceRepository.findById(id));
         //LOG.info("Retrieved " + list.size() + " service");
         return new ResponseEntity<List<ServiceUpl>>(l, HttpStatus.OK);
     }
