@@ -8,12 +8,12 @@
         <version>2.1.1.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.dialog.678.service</groupId>
+    <groupId>com.dialog.678.serviceUpl</groupId>
     <artifactId>678</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>678</name>
-    <description>Backend for the 678 service intigrator</description>
+    <description>Backend for the 678 serviceUpl intigrator</description>
 
     <properties>
         <java.version>1.8</java.version>

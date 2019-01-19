@@ -1,7 +1,7 @@
 package com.dialog.service678.controller;
 
 
-import com.dialog.service678.entity.Service;
+import com.dialog.service678.entity.ServiceUpl;
 import com.dialog.service678.service.ServiceHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -20,6 +20,9 @@ public class ServiceController {
     @Autowired
     private ServiceHandler serviceHandler;
 
+    // Define the log object for this class
+    private final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(this.getClass());
+
     private static final Logger LOG = Logger.getLogger(ServiceController.class.getName());
 
     //Create service
@@ -30,9 +33,9 @@ public class ServiceController {
         return serviceHandler.createService(payload);
     }
 
-    @RequestMapping( method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<List<Service>> getAllServices(Integer id) {
+    public ResponseEntity<List<ServiceUpl>> getAllServices(Integer id) {
         if (id == null) {
             LOG.info("Attempting to retrieve all service");
             return serviceHandler.getAll();
@@ -44,15 +47,4 @@ public class ServiceController {
     }
 
 
-    //Update service
-    //get all service
-    //get service by id
-    /*@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public ResponseEntity<List<Service>> getServicesById(Integer id) {
-        LOG.info("Attempting to retrieve service with id");
-        return serviceHandler.getAll();
-    }*/
-
-    //get service by name
 }

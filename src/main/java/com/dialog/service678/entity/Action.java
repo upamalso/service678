@@ -3,6 +3,7 @@ package com.dialog.service678.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Set;
 
 @Entity
@@ -35,11 +36,11 @@ public class Action {
 		this.service = service;
 	}
 
-	public Set<KeyWord> getKeyWords() {
+	public Collection<KeyWord> getKeyWords() {
 		return keyWords;
 	}
 
-	public void setKeyWords(Set<KeyWord> keyWords) {
+	public void setKeyWords(Collection<KeyWord> keyWords) {
 		this.keyWords = keyWords;
 	}
 
@@ -58,7 +59,7 @@ public class Action {
 	private DService service;
 
 	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="action")
-	private Set<KeyWord> keyWords;
+	private Collection<KeyWord> keyWords;
 	
 	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="API_ID")

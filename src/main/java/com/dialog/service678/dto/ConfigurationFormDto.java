@@ -8,6 +8,38 @@ public class ConfigurationFormDto {
     private String serviceName;
     private String description;
 
-    private Collection<PrivilegeDto> privilegeDtos = new ArrayList<>();
+    private Collection<ServiceFormDto> serviceFormDtos = new ArrayList<>();
 
+    public String getServiceName() {
+        return serviceName;
+    }
+
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Collection<ServiceFormDto> getServiceFormDtos() {
+        return serviceFormDtos;
+    }
+
+    public void setServiceFormDtos(Collection<ServiceFormDto> serviceFormDtos) {
+        this.serviceFormDtos = serviceFormDtos;
+    }
+
+    @Override
+    public String toString() {
+        return "ConfigurationFormDto{" +
+                "serviceName='" + serviceName + '\'' +
+                ", description='" + description + '\'' +
+                ", serviceFormDtos=" + serviceFormDtos +
+                '}';
+    }
 }

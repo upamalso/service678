@@ -1,3 +1,1 @@
-2019-01-18 16:05:58 INFO  AuthRestAPIs.authenticateUser [98] - authenticateUser method started. 
-2019-01-18 16:06:02 INFO  AuthRestAPIs.getApiResponse [35] - User has been successfully logged
-2019-01-18 16:06:02 INFO  AuthRestAPIs.authenticateUser [111] - eshan has been successfully logged
+2019-01-19 10:22:48 INFO  ConfigurationController.getApiResponse [35] - Configuration has been successfully saved
