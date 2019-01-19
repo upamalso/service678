@@ -28,6 +28,13 @@ public class ServiceHandler {
 
         //convert to service object
         Service service = new Service();
+
+        if (payload.containsKey("id")) {
+            if ((Integer)payload.get("id") > 0) {
+                service.setId(((Integer) payload.get("id")).longValue());
+            }
+        }
+
         service.setName(payload.get("name").toString());
         service.setStatus(payload.get("status").toString());
         ArrayList nodeList = (ArrayList)payload.get("data");
