@@ -1,4 +1,4 @@
-package com.dialog.service678.entities;
+package com.dialog.service678.entity;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElement;

@@ -1,8 +1,8 @@
-package com.dialog.service678.controllers;
+package com.dialog.service678.controller;
 
 
-import com.dialog.service678.entities.Service;
-import com.dialog.service678.services.ServiceHandler;
+import com.dialog.service678.entity.Service;
+import com.dialog.service678.service.ServiceHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +36,7 @@ public class ServiceController {
     @ResponseBody
     public ResponseEntity<List<Service>> getAllServices(Integer id) {
         if (id == null) {
-            LOG.info("Attempting to retrieve all services");
+            LOG.info("Attempting to retrieve all service");
             return serviceHandler.getAll();
         } else {
             LOG.info("Attempting to retrieve service by id : " + id);
@@ -47,7 +47,7 @@ public class ServiceController {
 
 
     //Update service
-    //get all services
+    //get all service
     //get service by id
     /*@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody

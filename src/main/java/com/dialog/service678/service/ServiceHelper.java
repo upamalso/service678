@@ -1,4 +1,4 @@
-package com.dialog.service678.services;
+package com.dialog.service678.service;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
