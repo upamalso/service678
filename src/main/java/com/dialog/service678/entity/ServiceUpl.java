@@ -27,9 +27,9 @@ public class ServiceUpl {
     private Timestamp createdDateTime;
     @XmlElement(name="updated-date-time")
     private Timestamp updatedDateTime;
-    private long serviceId;
-    private String description;
-    private String serviceName;
+    //private long serviceId;
+   // private String description;
+  //  private String serviceName;
 
     public ServiceUpl() {
     }
@@ -112,48 +112,4 @@ public class ServiceUpl {
                 '}';
     }
 
-    @Id
-    @Column(name = "service_id", nullable = false)
-    public long getServiceId() {
-        return serviceId;
-    }
-
-    public void setServiceId(long serviceId) {
-        this.serviceId = serviceId;
-    }
-
-    @Basic
-    @Column(name = "description", nullable = true, length = 255)
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    @Basic
-    @Column(name = "service_name", nullable = true, length = 255)
-    public String getServiceName() {
-        return serviceName;
-    }
-
-    public void setServiceName(String serviceName) {
-        this.serviceName = serviceName;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ServiceUpl serviceUpl = (ServiceUpl) o;
-        return serviceId == serviceUpl.serviceId &&
-                Objects.equals(description, serviceUpl.description) &&
-                Objects.equals(serviceName, serviceUpl.serviceName);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(serviceId, description, serviceName);
-    }
-}
+   }
