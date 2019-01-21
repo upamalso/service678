@@ -1,12 +1,12 @@
 package com.dialog.service678.repository;
 
-import com.dialog.service678.entity.DService;
+import com.dialog.service678.dto.ServiceFormDto;
+import com.dialog.service678.entity.Service;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface ServiceRep extends JpaRepository<DService, Long> {
-    @Query("SELECT Ser,Act,Ke,Api FROM DService Ser, Action Act, KeyWord Ke, SCApi Api")
-    List<Object> findServices();
+public interface ServiceRep extends JpaRepository<Service, Long> {
+
 }

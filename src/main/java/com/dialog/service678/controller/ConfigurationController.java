@@ -56,7 +56,7 @@ public class ConfigurationController {
      * @Return List
      ***/
     @GetMapping(path = "/all-configuration", produces = "application/json")
-    public List findAllConfiguration() {
+    public List<ServiceFormDto> findAllConfiguration() {
         log.info("method started. ");
         return configurationService.findAll();
     }

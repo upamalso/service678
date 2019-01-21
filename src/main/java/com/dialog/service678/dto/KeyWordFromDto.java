@@ -1,6 +1,6 @@
 package com.dialog.service678.dto;
 
-import com.dialog.service678.entity.Action;
+import com.dialog.service678.entity.Actions;
 
 public class KeyWordFromDto {
 
@@ -8,7 +8,7 @@ public class KeyWordFromDto {
     private String regEx;
     private int fullMatch;
     private int ignoreCase;
-    private Action actionId;
+    private Long actionId;
 
     public String getFirstKey() {
         return firstKey;
@@ -42,11 +42,11 @@ public class KeyWordFromDto {
         this.ignoreCase = ignoreCase;
     }
 
-    public Action getActionId() {
+    public Long getActionId() {
         return actionId;
     }
 
-    public void setActionId(Action actionId) {
+    public void setActionId(Long actionId) {
         this.actionId = actionId;
     }
 

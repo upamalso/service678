@@ -1,7 +1,7 @@
 package com.dialog.service678.auth.google2fa;
 
-import com.dialog.service678.repository.UserRepository;
 import com.dialog.service678.entity.User;
+import com.dialog.service678.repository.UserRepository;
 import org.jboss.aerogear.security.otp.Totp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;

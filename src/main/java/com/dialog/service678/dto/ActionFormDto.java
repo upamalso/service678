@@ -1,7 +1,5 @@
 package com.dialog.service678.dto;
 
-import com.dialog.service678.entity.SCApi;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -9,6 +7,7 @@ public class ActionFormDto {
 
     private String actionDesc;
     private Long apiId;
+    private Long serviceId;
 
     //One to Many
     private Collection<KeyWordFromDto> keyWordFromDtos = new ArrayList<>();
@@ -29,6 +28,14 @@ public class ActionFormDto {
         this.apiId = apiId;
     }
 
+    public Long getServiceId() {
+        return serviceId;
+    }
+
+    public void setServiceId(Long serviceId) {
+        this.serviceId = serviceId;
+    }
+
     public Collection<KeyWordFromDto> getKeyWordFromDtos() {
         return keyWordFromDtos;
     }
@@ -42,6 +49,7 @@ public class ActionFormDto {
         return "ActionFormDto{" +
                 "actionDesc='" + actionDesc + '\'' +
                 ", apiId=" + apiId +
+                ", serviceId=" + serviceId +
                 ", keyWordFromDtos=" + keyWordFromDtos +
                 '}';
     }

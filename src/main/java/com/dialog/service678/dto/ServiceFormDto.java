@@ -1,9 +1,10 @@
 package com.dialog.service678.dto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class ServiceFormDto {
+public class ServiceFormDto implements Serializable {
 
     private Long serviceId;
     private String serviceName;

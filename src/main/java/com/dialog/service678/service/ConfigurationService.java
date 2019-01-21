@@ -6,22 +6,21 @@ import com.dialog.service678.converter.ServiceConverter;
 import com.dialog.service678.dto.ActionFormDto;
 import com.dialog.service678.dto.KeyWordFromDto;
 import com.dialog.service678.dto.ServiceFormDto;
-import com.dialog.service678.entity.Action;
-import com.dialog.service678.entity.DService;
+import com.dialog.service678.entity.Actions;
 import com.dialog.service678.entity.KeyWord;
-import com.dialog.service678.entity.SCApi;
+import com.dialog.service678.entity.ScApi;
+import com.dialog.service678.entity.Service;
 import com.dialog.service678.repository.ActionRepository;
 import com.dialog.service678.repository.KeyWordRepository;
 import com.dialog.service678.repository.ScApiRepository;
 import com.dialog.service678.repository.ServiceRep;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-@Service
+@org.springframework.stereotype.Service
 public class ConfigurationService {
 
     // Define the log object for this class
@@ -45,9 +44,9 @@ public class ConfigurationService {
     @Autowired
     private ActionConverter actionConverter;
 
-    public List findAll() {
-//        return serviceRep.findAll().stream().map(serviceConverter::entityToDto).collect(Collectors.toList());
-        return serviceRep.findServices();
+    public List<ServiceFormDto> findAll() {
+        return serviceRep.findAll().stream().map(serviceConverter::entityToDto).collect(Collectors.toList());
+//        return serviceRep.findServices();
     }
 
     /**
@@ -61,16 +60,23 @@ public class ConfigurationService {
         log.info("serviceFormDto =" + serviceFormDto.toString());
 
         //Save service
-        DService dService = serviceConverter.dtoToEntity(serviceFormDto);
+
+        Service dService = serviceConverter.dtoToEntity(serviceFormDto);
         serviceRep.save(dService);
 
+        System.out.println("last inserted service id = "+dService.getServiceId());
+        dService.getServiceId();
+
         if (serviceFormDto.getActionFormDtos().size() > 0) {
+            serviceFormDto.setServiceId(dService.getServiceId());
             for (ActionFormDto actionFormDto : serviceFormDto.getActionFormDtos()) {
+
+                actionFormDto.setServiceId(dService.getServiceId());
                 //Get the api details according to the apiId
-                SCApi scApi = scApiRepository.findById(actionFormDto.getApiId()).orElse(new SCApi());
+//                ScApi scApi = scApiRepository.findById(actionFormDto.getApiId()).orElse(new ScApi());
 
                 //Save the action
-                Action action = actionConverter.dtoToEntity(actionFormDto, dService, scApi);
+                Actions action = actionConverter.dtoToEntity(actionFormDto);
                 actionRepository.save(action);
 
                 //Set the last inserted actionId
@@ -78,8 +84,9 @@ public class ConfigurationService {
 
                 if (actionFormDto.getKeyWordFromDtos().size() > 0) {
                     for (KeyWordFromDto keyWordFromDto : actionFormDto.getKeyWordFromDtos()) {
+                        keyWordFromDto.setActionId(action.getActionId());
                         //Save keywords
-                        KeyWord keyWord = KeyWordConverter.dtoToEntity(keyWordFromDto, action);
+                        KeyWord keyWord = KeyWordConverter.dtoToEntity(keyWordFromDto);
                         keyWordRepository.save(keyWord);
                     }
                 }

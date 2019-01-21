@@ -1,7 +1,6 @@
 package com.dialog.service678.repository;
 
 import com.dialog.service678.entity.Role;
-import com.dialog.service678.entity.RoleName;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
