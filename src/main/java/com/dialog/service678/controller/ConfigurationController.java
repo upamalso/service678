@@ -1,6 +1,5 @@
 package com.dialog.service678.controller;
 
-import com.dialog.service678.dto.ConfigurationFormDto;
 import com.dialog.service678.dto.ServiceFormDto;
 import com.dialog.service678.dto.response.ApiResponse;
 import com.dialog.service678.service.ConfigurationService;
@@ -11,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
 
 import static com.dialog.service678.dto.response.ApiResponse.getApiResponse;
@@ -44,7 +42,7 @@ public class ConfigurationController {
         Boolean result = configurationService.save(serviceFormDto);
         if (result == true){
             ApiResponse apiResponse = getApiResponse("200", "configuration.save", messageSource, log);
-            return ResponseEntity.status(HttpStatus.OK).body(apiResponse);
+            return ResponseEntity.status(HttpStatus.CREATED).body(apiResponse);
         }else{
             ApiResponse apiResponse = getApiResponse("400", "configuration.saveFailed", messageSource, log);
             return ResponseEntity.status(HttpStatus. BAD_REQUEST).body(apiResponse);
@@ -60,6 +58,28 @@ public class ConfigurationController {
     public List<ServiceFormDto> findAllConfiguration() {
         log.info("method started. ");
         return configurationService.findAll();
+    }
+
+    /**
+     * @Des get all service configuration
+     * @Return List
+     ***/
+    @GetMapping(path = "/get-configuration", produces = "application/json")
+    public ResponseEntity findConfigurationsById(@RequestParam (value = "serviceId", required=false) Integer serviceId,
+                                                 @RequestParam (value = "includeDetails", required=false, defaultValue = "false") Boolean includeDetails) {
+        log.info("method started. ");
+        if (serviceId != null && serviceId > 0) {
+            if (includeDetails != null && includeDetails) {
+                ApiResponse apiResponse = getApiResponse(HttpStatus.OK.toString(), "configuration.save", messageSource, log);
+                return ResponseEntity.status(HttpStatus.OK).body(configurationService.findServiceFullinforByServiceId(serviceId.longValue()));
+            } else {
+                ApiResponse apiResponse = getApiResponse(HttpStatus.OK.toString(), "configuration.save", messageSource, log);
+                return ResponseEntity.status(HttpStatus.OK).body(configurationService.findServiceByServiceId(serviceId.longValue()));
+            }
+        } else {
+            ApiResponse apiResponse = getApiResponse("400", "configuration.saveFailed", messageSource, log);
+            return ResponseEntity.status(HttpStatus. BAD_REQUEST).body(apiResponse);
+        }
     }
 
 }

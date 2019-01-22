@@ -12,6 +12,7 @@ public class ServiceConverter {
 
     public ServiceFormDto entityToDto(Service dService) {
         ServiceFormDto serviceFormDto = new ServiceFormDto();
+        serviceFormDto.setServiceId(dService.getServiceId());
         serviceFormDto.setServiceName(dService.getServiceName());
         serviceFormDto.setDescription(dService.getDescription());
         serviceFormDto.setActionFormDtos(dService.getActionsByServiceId().stream().map(ActionConverter::entityToDto).collect(Collectors.toList()));

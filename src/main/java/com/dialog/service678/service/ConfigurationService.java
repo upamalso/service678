@@ -17,6 +17,7 @@ import com.dialog.service678.repository.ServiceRep;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,7 +47,16 @@ public class ConfigurationService {
 
     public List<ServiceFormDto> findAll() {
         return serviceRep.findAll().stream().map(serviceConverter::entityToDto).collect(Collectors.toList());
-//        return serviceRep.findServices();
+    }
+
+    public Service findServiceByServiceId(Long serviceId) {
+        return serviceRep.findById(serviceId).get();
+    }
+
+    public List<ServiceFormDto> findServiceFullinforByServiceId(Long serviceId) {
+        List<Service> serviceList = new ArrayList<>();
+        serviceList.add(serviceRep.findById(serviceId).get());
+        return serviceList.stream().map(serviceConverter::entityToDto).collect(Collectors.toList());
     }
 
     /**
