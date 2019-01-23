@@ -1,5 +1,6 @@
 package com.dialog.service678.service;
 
+import com.dialog.service678.auth.event.OnRegistrationCompleteEvent;
 import com.dialog.service678.converter.ActionConverter;
 import com.dialog.service678.converter.KeyWordConverter;
 import com.dialog.service678.converter.ServiceConverter;
@@ -16,9 +17,13 @@ import com.dialog.service678.repository.ScApiRepository;
 import com.dialog.service678.repository.ServiceRep;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @org.springframework.stereotype.Service
@@ -64,7 +69,7 @@ public class ConfigurationService {
      * @Param ServiceFormDto serviceFormDto
      * @Return boolean
      ***/
-    public boolean save(ServiceFormDto serviceFormDto) {
+    public Long save(ServiceFormDto serviceFormDto) {
 
         log.info("method started. ");
         log.info("serviceFormDto =" + serviceFormDto.toString());
@@ -75,9 +80,11 @@ public class ConfigurationService {
         serviceRep.save(dService);
 
         System.out.println("last inserted service id = "+dService.getServiceId());
-        dService.getServiceId();
 
-        if (serviceFormDto.getActionFormDtos().size() > 0) {
+
+        if (CollectionUtils.isEmpty(serviceFormDto.getActionFormDtos())) {
+            return Long.parseLong("-1");
+        }else{
             serviceFormDto.setServiceId(dService.getServiceId());
             for (ActionFormDto actionFormDto : serviceFormDto.getActionFormDtos()) {
 
@@ -102,9 +109,7 @@ public class ConfigurationService {
                 }
 
             }
-            return true;
-        }else{
-            return false;
+            return dService.getServiceId();
         }
 
     }

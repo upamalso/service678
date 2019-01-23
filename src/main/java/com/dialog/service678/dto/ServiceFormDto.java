@@ -6,6 +6,7 @@ import java.util.Collection;
 
 public class ServiceFormDto implements Serializable {
 
+
     private Long serviceId;
     private String serviceName;
     private String description;

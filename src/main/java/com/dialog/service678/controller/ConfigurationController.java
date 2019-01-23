@@ -39,13 +39,16 @@ public class ConfigurationController {
     ) {
         System.out.println(serviceFormDto.toString());
         log.info("method started. ");
-        Boolean result = configurationService.save(serviceFormDto);
-        if (result == true){
-            ApiResponse apiResponse = getApiResponse("200", "configuration.save", messageSource, log);
+        Long result = configurationService.save(serviceFormDto);
+        if (result > 0){
+            ApiResponse apiResponse = getApiResponse(HttpStatus.CREATED.toString(), "configuration.save", messageSource, log);
             return ResponseEntity.status(HttpStatus.CREATED).body(apiResponse);
-        }else{
-            ApiResponse apiResponse = getApiResponse("400", "configuration.saveFailed", messageSource, log);
-            return ResponseEntity.status(HttpStatus. BAD_REQUEST).body(apiResponse);
+        } else if(result == -1) {
+            ApiResponse apiResponse = getApiResponse(HttpStatus.CREATED.toString(),"configuration.only.save", messageSource, log);
+            return ResponseEntity.status(HttpStatus.CREATED).body(apiResponse);
+        } else{
+            ApiResponse apiResponse = getApiResponse(HttpStatus.CREATED.toString(), "configuration.saveFailed", messageSource, log);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiResponse);
         }
 
     }
