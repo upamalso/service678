@@ -58,12 +58,6 @@ public class ConfigurationService {
         List<DService> serviceList = new ArrayList<>();
         serviceList.add(serviceRep.findById(serviceId).get());
         return serviceList.stream().map(serviceConverter::entityToDto).collect(Collectors.toList());
-
-//        List<DService> serviceList = new ArrayList<>();
-//        serviceList.add(serviceRep.findById(serviceId).get());
-//        return serviceList.stream().map(FindServiceFullinforByServiceId::findServiceFullinforByServiceId).collect(Collectors.toList());
-
-
     }
 
     /**
