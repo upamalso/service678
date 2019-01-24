@@ -17,7 +17,7 @@ import static com.dialog.service678.dto.response.ApiResponse.getApiResponse;
 @RestController
 @RequestMapping("/api/config")
 @CrossOrigin
-public class ConfigurationController {
+public class DServiceController {
 
     // Define the log object for this class
     private final Logger log = Logger.getLogger(this.getClass());

@@ -6,9 +6,13 @@ import java.util.Collection;
 
 public class ServiceFormDto implements Serializable {
 
+
     private Long serviceId;
     private String serviceName;
     private String description;
+
+    //One to Many
+    private Collection<ActionFormDto> actionFormDtos = new ArrayList<>();
 
     public Long getServiceId() {
         return serviceId;
@@ -17,9 +21,6 @@ public class ServiceFormDto implements Serializable {
     public void setServiceId(Long serviceId) {
         this.serviceId = serviceId;
     }
-
-    //One to Many
-    private Collection<ActionFormDto> actionFormDtos = new ArrayList<>();
 
     public String getServiceName() {
         return serviceName;

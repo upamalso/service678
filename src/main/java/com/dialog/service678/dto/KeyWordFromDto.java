@@ -1,6 +1,6 @@
 package com.dialog.service678.dto;
 
-import com.dialog.service678.entity.Actions;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class KeyWordFromDto {
 
@@ -8,6 +8,7 @@ public class KeyWordFromDto {
     private String regEx;
     private int fullMatch;
     private int ignoreCase;
+    @JsonIgnore
     private Long actionId;
 
     public String getFirstKey() {

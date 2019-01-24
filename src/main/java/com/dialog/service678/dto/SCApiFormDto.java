@@ -3,12 +3,13 @@ package com.dialog.service678.dto;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class ScApiFormDto {
+public class SCApiFormDto {
 
     private Long apiId;
     private String apiName;
     private String apiDesc;
     private String apiXml;
+    private int isSmsApi;
 
     //One to Many
     private Collection<ActionFormDto> actionFormDtos = new ArrayList<>();
@@ -53,13 +54,22 @@ public class ScApiFormDto {
         this.actionFormDtos = actionFormDtos;
     }
 
+    public int getIsSmsApi() {
+        return isSmsApi;
+    }
+
+    public void setIsSmsApi(int isSmsApi) {
+        this.isSmsApi = isSmsApi;
+    }
+
     @Override
     public String toString() {
-        return "ScApiFormDto{" +
+        return "SCApiFormDto{" +
                 "apiId=" + apiId +
                 ", apiName='" + apiName + '\'' +
                 ", apiDesc='" + apiDesc + '\'' +
                 ", apiXml='" + apiXml + '\'' +
+                ", isSmsApi=" + isSmsApi +
                 ", actionFormDtos=" + actionFormDtos +
                 '}';
     }

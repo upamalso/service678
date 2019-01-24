@@ -1,5 +1,7 @@
 package com.dialog.service678.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -7,10 +9,19 @@ public class ActionFormDto {
 
     private String actionDesc;
     private Long apiId;
+    @JsonIgnore
     private Long serviceId;
+
+    public ActionFormDto(String actionDesc) {
+        this.actionDesc = actionDesc;
+    }
 
     //One to Many
     private Collection<KeyWordFromDto> keyWordFromDtos = new ArrayList<>();
+
+    public ActionFormDto() {
+
+    }
 
     public String getActionDesc() {
         return actionDesc;

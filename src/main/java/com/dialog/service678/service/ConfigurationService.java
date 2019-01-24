@@ -6,10 +6,10 @@ import com.dialog.service678.converter.ServiceConverter;
 import com.dialog.service678.dto.ActionFormDto;
 import com.dialog.service678.dto.KeyWordFromDto;
 import com.dialog.service678.dto.ServiceFormDto;
-import com.dialog.service678.entity.Actions;
+import com.dialog.service678.entity.Action;
+import com.dialog.service678.entity.DService;
 import com.dialog.service678.entity.KeyWord;
-import com.dialog.service678.entity.ScApi;
-import com.dialog.service678.entity.Service;
+import com.dialog.service678.entity.SCApi;
 import com.dialog.service678.repository.ActionRepository;
 import com.dialog.service678.repository.KeyWordRepository;
 import com.dialog.service678.repository.ScApiRepository;
@@ -46,17 +46,24 @@ public class ConfigurationService {
     private ActionConverter actionConverter;
 
     public List<ServiceFormDto> findAll() {
-        return serviceRep.findAll().stream().map(serviceConverter::entityToDto).collect(Collectors.toList());
+        List<ServiceFormDto> serviceFormDto = serviceRep.findAll().stream().map(serviceConverter::entityToDto).collect(Collectors.toList());
+        return serviceFormDto;
     }
 
-    public Service findServiceByServiceId(Long serviceId) {
+    public DService findServiceByServiceId(Long serviceId) {
         return serviceRep.findById(serviceId).get();
     }
 
     public List<ServiceFormDto> findServiceFullinforByServiceId(Long serviceId) {
-        List<Service> serviceList = new ArrayList<>();
+        List<DService> serviceList = new ArrayList<>();
         serviceList.add(serviceRep.findById(serviceId).get());
         return serviceList.stream().map(serviceConverter::entityToDto).collect(Collectors.toList());
+
+//        List<DService> serviceList = new ArrayList<>();
+//        serviceList.add(serviceRep.findById(serviceId).get());
+//        return serviceList.stream().map(FindServiceFullinforByServiceId::findServiceFullinforByServiceId).collect(Collectors.toList());
+
+
     }
 
     /**
@@ -71,22 +78,22 @@ public class ConfigurationService {
 
         //Save service
 
-        Service dService = serviceConverter.dtoToEntity(serviceFormDto);
+        DService dService = serviceConverter.dtoToEntity(serviceFormDto);
         serviceRep.save(dService);
 
-        System.out.println("last inserted service id = "+dService.getServiceId());
         dService.getServiceId();
 
-        if (serviceFormDto.getActionFormDtos().size() > 0) {
+//        if (serviceFormDto.getActionFormDtos().size() > 0) {
             serviceFormDto.setServiceId(dService.getServiceId());
             for (ActionFormDto actionFormDto : serviceFormDto.getActionFormDtos()) {
 
-                actionFormDto.setServiceId(dService.getServiceId());
                 //Get the api details according to the apiId
-//                ScApi scApi = scApiRepository.findById(actionFormDto.getApiId()).orElse(new ScApi());
+                SCApi scApi = scApiRepository.findById(actionFormDto.getApiId()).orElse(new SCApi());
+
+                actionFormDto.setServiceId(dService.getServiceId());
 
                 //Save the action
-                Actions action = actionConverter.dtoToEntity(actionFormDto);
+                Action action = actionConverter.dtoToEntity(actionFormDto,dService,scApi);
                 actionRepository.save(action);
 
                 //Set the last inserted actionId
@@ -96,16 +103,16 @@ public class ConfigurationService {
                     for (KeyWordFromDto keyWordFromDto : actionFormDto.getKeyWordFromDtos()) {
                         keyWordFromDto.setActionId(action.getActionId());
                         //Save keywords
-                        KeyWord keyWord = KeyWordConverter.dtoToEntity(keyWordFromDto);
+                        KeyWord keyWord = KeyWordConverter.dtoToEntity(keyWordFromDto, action);
                         keyWordRepository.save(keyWord);
                     }
                 }
 
             }
             return true;
-        }else{
-            return false;
-        }
+//        }else{
+//            return false;
+//        }
 
     }
 }

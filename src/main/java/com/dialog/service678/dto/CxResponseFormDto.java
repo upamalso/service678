@@ -1,20 +1,9 @@
-/**
- * @author : amila hettiarachchi
- * @email : amila.hettiarachchi@axiatadigitallabs.com
- * @date : Jan 15, 2019
- */
-package com.dialog.service678.entity;
+package com.dialog.service678.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.Serializable;
 
-import javax.persistence.*;
-import java.util.Set;
+public class CxResponseFormDto implements Serializable {
 
-@Entity
-@Table(name = "CX_RESPONSE")
-public class CxResponse {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private int resCode;
     private String resDesc;
@@ -22,10 +11,7 @@ public class CxResponse {
     private String sourcePort;
     private int sendToOriginatedNo;
     private int sendToNotifyNo;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "SCAPI_ID")
-    @JsonIgnore
-    private SCApi scApi;
+    private Long scapi_id;
 
     public Long getId() {
         return id;
@@ -67,14 +53,6 @@ public class CxResponse {
         this.sourcePort = sourcePort;
     }
 
-    public SCApi getScApi() {
-        return scApi;
-    }
-
-    public void setScApi(SCApi scApi) {
-        this.scApi = scApi;
-    }
-
     public int getSendToOriginatedNo() {
         return sendToOriginatedNo;
     }
@@ -91,16 +69,25 @@ public class CxResponse {
         this.sendToNotifyNo = sendToNotifyNo;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "cxResponse")
-    private Set<CxResponseToChannelBinder> cxResponseToChannelBinder;
-
-    public Set<CxResponseToChannelBinder> getCxResponseToChannelBinder() {
-        return cxResponseToChannelBinder;
+    public Long getScapi_id() {
+        return scapi_id;
     }
 
-    public void setCxResponseToChannelBinder(Set<CxResponseToChannelBinder> cxResponseToChannelBinder) {
-        this.cxResponseToChannelBinder = cxResponseToChannelBinder;
+    public void setScapi_id(Long scapi_id) {
+        this.scapi_id = scapi_id;
     }
 
-
+    @Override
+    public String toString() {
+        return "CxResponseFormDto{" +
+                "id=" + id +
+                ", resCode=" + resCode +
+                ", resDesc='" + resDesc + '\'' +
+                ", sms='" + sms + '\'' +
+                ", sourcePort='" + sourcePort + '\'' +
+                ", sendToOriginatedNo=" + sendToOriginatedNo +
+                ", sendToNotifyNo=" + sendToNotifyNo +
+                ", scapi_id=" + scapi_id +
+                '}';
+    }
 }
